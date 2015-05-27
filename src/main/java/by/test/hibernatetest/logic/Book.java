@@ -10,18 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"Books\"")
+@Table(name = "books")
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = -1781734221468874593L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "\"TITLE\"")
+	@Column(name = "title")
 	private String title;
-	@Column(name = "\"DESCRIPTION\"")
+	@Column(name = "description")
 	private String description;
 
 	public Long getId() {

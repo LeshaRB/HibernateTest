@@ -10,16 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "\"Authors\"")
+@Table(name = "authors")
 public class Author implements Serializable {
 
 	private static final long serialVersionUID = 9141137335185384021L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "\"FIO\"")
+	@Column(name = "fio")
 	private String fio;
 
 	public Long getId() {

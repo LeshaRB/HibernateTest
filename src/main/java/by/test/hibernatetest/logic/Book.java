@@ -1,12 +1,15 @@
 package by.test.hibernatetest.logic;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,8 @@ public class Book implements Serializable {
 	private String title;
 	@Column(name = "description")
 	private String description;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "books")
+	private List<Author> authors;
 
 	public Long getId() {
 		return id;
@@ -47,4 +52,13 @@ public class Book implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<Author> authors) {
+		this.authors = authors;
+	}
+
 }

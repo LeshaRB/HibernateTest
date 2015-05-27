@@ -37,9 +37,21 @@ public class App {
 			// addROWS(authorDAO, bookDAO);
 			readROWS(authorDAO, bookDAO, websiteDAO);
 
+			System.out.println("===========================================");
 			Author author = authorDAO.getAuthorById(Long.valueOf("1"));
 			System.out.println(author.getWebsite().getUrl());
+			for (Book book : author.getBooks()) {
+				System.out.println(book.getTitle());
+			}
 
+			System.out.println("===========================================");
+			Book book = bookDAO.getBookById(Long.valueOf("2"));
+			System.out.println(book.getTitle());
+			for (Author authorN : book.getAuthors()) {
+				System.out.println(authorN.getFio());
+			}
+
+			System.out.println("===========================================");
 			Website website = websiteDAO.getWebsiteById(Long.valueOf("1"));
 			System.out.println(website.getAuthor().getFio());
 

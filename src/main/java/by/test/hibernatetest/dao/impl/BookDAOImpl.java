@@ -47,7 +47,7 @@ public class BookDAOImpl implements BookDAO {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			book = (Book) session.load(Book.class, bookID);
+			book = (Book) session.get(Book.class, bookID);
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());

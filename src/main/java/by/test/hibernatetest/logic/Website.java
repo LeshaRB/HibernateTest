@@ -7,25 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "authors")
-public class Author implements Serializable {
+@Table(name = "website")
+public class Website implements Serializable {
 
-	private static final long serialVersionUID = 9141137335185384021L;
+	private static final long serialVersionUID = 703969224229828137L;
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "fio")
-	private String fio;
-	@OneToOne
-	@JoinColumn(name = "websiteid")
-	Website website;
+	@Column(name = "url")
+	private String url;
+	@OneToOne(mappedBy = "website")
+	private Author author;
 
 	public Long getId() {
 		return id;
@@ -35,20 +33,20 @@ public class Author implements Serializable {
 		this.id = id;
 	}
 
-	public String getFio() {
-		return fio;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setFio(String fio) {
-		this.fio = fio;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public Website getWebsite() {
-		return website;
+	public Author getAuthor() {
+		return author;
 	}
 
-	public void setWebsite(Website website) {
-		this.website = website;
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 }

@@ -6,18 +6,18 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
-import by.test.hibernatetest.dao.AuthorDAO;
-import by.test.hibernatetest.logic.Author;
+import by.test.hibernatetest.dao.WebsiteDAO;
+import by.test.hibernatetest.logic.Website;
 import by.test.hibernatetest.util.HibernateUtil;
 
-public class AuthorDAOImpl implements AuthorDAO {
+public class WebsiteDAOImpl implements WebsiteDAO {
 
-	public void addAuthor(Author author) throws SQLException {
+	public void addWebsite(Website website) throws SQLException {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			session.save(author);
+			session.save(website);
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());
@@ -27,12 +27,12 @@ public class AuthorDAOImpl implements AuthorDAO {
 		}
 	}
 
-	public void updateAuthor(Author author) throws SQLException {
+	public void updateWebsite(Website website) throws SQLException {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			session.update(author);
+			session.update(website);
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());
@@ -42,13 +42,13 @@ public class AuthorDAOImpl implements AuthorDAO {
 		}
 	}
 
-	public Author getAuthorById(Long authorID) throws SQLException {
+	public Website getWebsiteById(Long websiteID) throws SQLException {
 		Session session = null;
-		Author author = null;
+		Website website = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			author = (Author) session.get(Author.class, authorID);
+			website = (Website) session.get(Website.class, websiteID);
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());
@@ -56,16 +56,16 @@ public class AuthorDAOImpl implements AuthorDAO {
 			if (session != null && session.isOpen())
 				session.close();
 		}
-		return author;
+		return website;
 	}
 
-	public List<Author> getAllAuthors() throws SQLException {
+	public List<Website> getAllWebsites() throws SQLException {
 		Session session = null;
-		List<Author> authors = null;
+		List<Website> websites = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			authors = session.createCriteria(Author.class).list();
+			websites = session.createCriteria(Website.class).list();
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());
@@ -73,15 +73,15 @@ public class AuthorDAOImpl implements AuthorDAO {
 			if (session != null && session.isOpen())
 				session.close();
 		}
-		return authors;
+		return websites;
 	}
 
-	public void deleteAuthor(Author author) throws SQLException {
+	public void deleteWebsite(Website website) throws SQLException {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			session.delete(author);
+			session.delete(website);
 			session.getTransaction().commit();
 		} catch (HibernateException hEx) {
 			System.out.println(hEx.getLocalizedMessage());

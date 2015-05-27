@@ -20,5 +20,6 @@
 
 		<mapping class="by.test.hibernatetest.logic.Book" />
 		<mapping class="by.test.hibernatetest.logic.Author" />
+		<mapping class="by.test.hibernatetest.logic.Website" />
 	</session-factory>
 </hibernate-configuration>

@@ -5,8 +5,10 @@ import java.util.List;
 
 import by.test.hibernatetest.dao.AuthorDAO;
 import by.test.hibernatetest.dao.BookDAO;
+import by.test.hibernatetest.dao.WebsiteDAO;
 import by.test.hibernatetest.logic.Author;
 import by.test.hibernatetest.logic.Book;
+import by.test.hibernatetest.logic.Website;
 import by.test.hibernatetest.util.HibernateUtil;
 
 public class App {
@@ -29,10 +31,18 @@ public class App {
 		Factory factory = Factory.getInstance();
 		AuthorDAO authorDAO = factory.getAuthorDAO();
 		BookDAO bookDAO = factory.getBookDAO();
+		WebsiteDAO websiteDAO = factory.getWebsiteDAO();
 
 		try {
-			addROWS(authorDAO, bookDAO);
-			readROWS(authorDAO, bookDAO);
+			// addROWS(authorDAO, bookDAO);
+			readROWS(authorDAO, bookDAO, websiteDAO);
+
+			Author author = authorDAO.getAuthorById(Long.valueOf("1"));
+			System.out.println(author.getWebsite().getUrl());
+
+			Website website = websiteDAO.getWebsiteById(Long.valueOf("1"));
+			System.out.println(website.getAuthor().getFio());
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -40,8 +50,8 @@ public class App {
 		HibernateUtil.closeSessionFactory();
 	}
 
-	private static void readROWS(AuthorDAO authorDAO, BookDAO bookDAO)
-			throws SQLException {
+	private static void readROWS(AuthorDAO authorDAO, BookDAO bookDAO,
+			WebsiteDAO websiteDAO) throws SQLException {
 		System.out.println("===========================================");
 		List<Author> authors = authorDAO.getAllAuthors();
 		for (Author author : authors) {
@@ -54,6 +64,12 @@ public class App {
 			System.out.println("ID = " + book.getId() + " TITLE = "
 					+ book.getTitle() + " DESCRIPTION = "
 					+ book.getDescription());
+		}
+		System.out.println("===========================================");
+		List<Website> websites = websiteDAO.getAllWebsites();
+		for (Website website : websites) {
+			System.out.println("ID = " + website.getId() + " URL = "
+					+ website.getUrl());
 		}
 	}
 }

@@ -12,12 +12,11 @@ import by.test.hibernatetest.logic.Website;
 import by.test.hibernatetest.util.HibernateUtil;
 
 public class App {
-	private static void addROWS(AuthorDAO authorDAO, BookDAO bookDAO)
-			throws SQLException {
+	private static void addROWS(AuthorDAO authorDAO, BookDAO bookDAO) throws SQLException {
 		for (int i = 0; i < 5; i++) {
 			Book book = new Book();
-			book.setDescription("Description " + i);
-			book.setTitle("Title " + i);
+			book.getBookinfo().setDescription("Description " + i);
+			book.getBookinfo().setTitle("Title " + i);
 			bookDAO.addBook(book);
 		}
 		for (int i = 0; i < 5; i++) {
@@ -41,12 +40,12 @@ public class App {
 			Author author = authorDAO.getAuthorById(Long.valueOf("1"));
 			System.out.println(author.getWebsite().getUrl());
 			for (Book book : author.getBooks()) {
-				System.out.println(book.getTitle());
+				System.out.println(book.getBookinfo().getTitle());
 			}
 
 			System.out.println("===========================================");
 			Book book = bookDAO.getBookById(Long.valueOf("2"));
-			System.out.println(book.getTitle());
+			System.out.println(book.getBookinfo().getTitle());
 			for (Author authorN : book.getAuthors()) {
 				System.out.println(authorN.getFio());
 			}
@@ -62,26 +61,22 @@ public class App {
 		HibernateUtil.closeSessionFactory();
 	}
 
-	private static void readROWS(AuthorDAO authorDAO, BookDAO bookDAO,
-			WebsiteDAO websiteDAO) throws SQLException {
+	private static void readROWS(AuthorDAO authorDAO, BookDAO bookDAO, WebsiteDAO websiteDAO) throws SQLException {
 		System.out.println("===========================================");
 		List<Author> authors = authorDAO.getAllAuthors();
 		for (Author author : authors) {
-			System.out.println("ID = " + author.getId() + " FIO = "
-					+ author.getFio());
+			System.out.println("ID = " + author.getId() + " FIO = " + author.getFio());
 		}
 		System.out.println("===========================================");
 		List<Book> books = bookDAO.getAllBooks();
 		for (Book book : books) {
-			System.out.println("ID = " + book.getId() + " TITLE = "
-					+ book.getTitle() + " DESCRIPTION = "
-					+ book.getDescription());
+			System.out.println("ID = " + book.getId() + " TITLE = " + book.getBookinfo().getTitle() + " DESCRIPTION = "
+					+ book.getBookinfo().getDescription());
 		}
 		System.out.println("===========================================");
 		List<Website> websites = websiteDAO.getAllWebsites();
 		for (Website website : websites) {
-			System.out.println("ID = " + website.getId() + " URL = "
-					+ website.getUrl());
+			System.out.println("ID = " + website.getId() + " URL = " + website.getUrl());
 		}
 	}
 }

@@ -1,6 +1,11 @@
-﻿-- Table: website
+﻿DROP TABLE IF EXISTS "cars";
+DROP TABLE IF EXISTS "authorsbooks";
+DROP TABLE IF EXISTS "books";
+DROP TABLE IF EXISTS "authors";
+DROP TABLE IF EXISTS "website";
 
-DROP TABLE IF EXISTS website CASCADE;
+
+-- Table: website
 
 CREATE TABLE website
 (
@@ -15,8 +20,6 @@ ALTER TABLE website
   OWNER TO postgres;
 
 -- Table: "authors"
-
-DROP TABLE IF EXISTS "authors" CASCADE;
 
 CREATE TABLE "authors"
 (
@@ -37,8 +40,6 @@ ALTER TABLE "authors"
 
 -- Table: "books"
 
-DROP TABLE IF EXISTS "books" CASCADE;
-
 CREATE TABLE "books"
 (
   "id" serial NOT NULL,
@@ -53,8 +54,6 @@ ALTER TABLE "books"
   OWNER TO postgres;
 
 -- Table: authorsbooks
-
-DROP TABLE IF EXISTS authorsbooks;
 
 CREATE TABLE authorsbooks
 (
@@ -73,8 +72,25 @@ WITH (
 );
 ALTER TABLE authorsbooks
   OWNER TO postgres;
+  
+-- Table: cars
 
-
+CREATE TABLE "cars"
+(
+  "id" serial NOT NULL,
+  "model" text,
+  "authorid" smallint,
+  CONSTRAINT "ForeignKEYAuthors" FOREIGN KEY (authorid)
+      REFERENCES authors (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,  
+  CONSTRAINT "PrimaryKEYCars" PRIMARY KEY ("id")
+)
+WITH (
+  OidS=FALSE
+);
+ALTER TABLE "cars"
+  OWNER TO postgres;
+  
 insert into website (url) values ('www.tut.by');
 insert into website (url) values ('www.mail.ru');
 insert into website (url) values ('www.yandex.com');
@@ -97,3 +113,9 @@ insert into authorsbooks (authorid, bookid) values (2, 2);
 insert into authorsbooks (authorid, bookid) values (3, 2);
 insert into authorsbooks (authorid, bookid) values (6, 2);
 insert into authorsbooks (authorid, bookid) values (4, 3);
+
+insert into cars (model, authorid) values ('Mersedes', 1);
+insert into cars (model, authorid) values ('Reno', 1);
+insert into cars (model, authorid) values ('BMW', 2);
+insert into cars (model, authorid) values ('Ford', 2);
+insert into cars (model, authorid) values ('Opel', 2);

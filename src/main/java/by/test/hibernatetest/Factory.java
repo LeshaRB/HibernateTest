@@ -2,9 +2,11 @@ package by.test.hibernatetest;
 
 import by.test.hibernatetest.dao.AuthorDAO;
 import by.test.hibernatetest.dao.BookDAO;
+import by.test.hibernatetest.dao.CarDAO;
 import by.test.hibernatetest.dao.WebsiteDAO;
 import by.test.hibernatetest.dao.impl.AuthorDAOImpl;
 import by.test.hibernatetest.dao.impl.BookDAOImpl;
+import by.test.hibernatetest.dao.impl.CarDAOImpl;
 import by.test.hibernatetest.dao.impl.WebsiteDAOImpl;
 
 public class Factory {
@@ -13,6 +15,7 @@ public class Factory {
 	private AuthorDAO authorDAO;
 	private BookDAO bookDAO;
 	private WebsiteDAO websiteDAO;
+	private CarDAO carDAO;
 
 	private Factory() {
 	}
@@ -39,5 +42,11 @@ public class Factory {
 		if (websiteDAO == null)
 			websiteDAO = new WebsiteDAOImpl();
 		return websiteDAO;
+	}
+
+	public CarDAO getCarDAO() {
+		if (carDAO == null)
+			carDAO = new CarDAOImpl();
+		return carDAO;
 	}
 }

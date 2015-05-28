@@ -21,5 +21,6 @@
 		<mapping class="by.test.hibernatetest.logic.Book" />
 		<mapping class="by.test.hibernatetest.logic.Author" />
 		<mapping class="by.test.hibernatetest.logic.Website" />
+		<mapping class="by.test.hibernatetest.logic.Car" />
 	</session-factory>
 </hibernate-configuration>

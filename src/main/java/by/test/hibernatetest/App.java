@@ -5,9 +5,11 @@ import java.util.List;
 
 import by.test.hibernatetest.dao.AuthorDAO;
 import by.test.hibernatetest.dao.BookDAO;
+import by.test.hibernatetest.dao.CarDAO;
 import by.test.hibernatetest.dao.WebsiteDAO;
 import by.test.hibernatetest.logic.Author;
 import by.test.hibernatetest.logic.Book;
+import by.test.hibernatetest.logic.Car;
 import by.test.hibernatetest.logic.Website;
 import by.test.hibernatetest.util.HibernateUtil;
 
@@ -31,28 +33,37 @@ public class App {
 		AuthorDAO authorDAO = factory.getAuthorDAO();
 		BookDAO bookDAO = factory.getBookDAO();
 		WebsiteDAO websiteDAO = factory.getWebsiteDAO();
+		CarDAO carDAO = factory.getCarDAO();
 
 		try {
 			// addROWS(authorDAO, bookDAO);
 			readROWS(authorDAO, bookDAO, websiteDAO);
 
-			System.out.println("===========================================");
-			Author author = authorDAO.getAuthorById(Long.valueOf("1"));
+			System.out.println("Author===========================================");
+			Author author = authorDAO.getAuthorById(Long.valueOf("2"));
 			System.out.println(author.getWebsite().getUrl());
 			for (Book book : author.getBooks()) {
 				System.out.println(book.getBookinfo().getTitle());
 			}
+			for (Car car : author.getCars()) {
+				System.out.println(car.getModel());
+			}
 
-			System.out.println("===========================================");
+			System.out.println("Book===========================================");
 			Book book = bookDAO.getBookById(Long.valueOf("2"));
 			System.out.println(book.getBookinfo().getTitle());
 			for (Author authorN : book.getAuthors()) {
 				System.out.println(authorN.getFio());
 			}
 
-			System.out.println("===========================================");
+			System.out.println("Website===========================================");
 			Website website = websiteDAO.getWebsiteById(Long.valueOf("1"));
 			System.out.println(website.getAuthor().getFio());
+
+			System.out.println("Car===========================================");
+			Car car = carDAO.getCarById(Long.valueOf("2"));
+			System.out.println(car.getModel());
+			System.out.println(car.getAuthor().getFio());
 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
